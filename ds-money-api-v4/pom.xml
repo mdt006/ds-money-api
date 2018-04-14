@@ -1,0 +1,173 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+	<groupId>com.money</groupId>
+	<artifactId>money-parent</artifactId>
+	<version>1.0.0</version>
+	</parent>
+	<groupId>ds-money-api-v4</groupId>
+	<artifactId>ds-money-api-v4</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<!-- 环境切换 -->
+	<profiles>
+		<profile>
+			<!-- 本地开发环境 -->
+			<id>beta</id>
+			<properties>
+				<package.environment>beta</package.environment>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<!-- 正式环境 -->
+			<id>prod</id>
+			<properties>
+				<package.environment>prod</package.environment>
+			</properties>
+		</profile>
+
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+
+					<webResources>
+						<resource>
+							<!-- 资源根目录排除各环境的配置-->
+							<excludes>
+								<exclude>beta/*</exclude>
+								<exclude>prod/*</exclude>
+							</excludes>
+							<directory>src/main/resources/${package.environment}</directory>
+							<targetPath>WEB-INF/classes</targetPath>
+							<filtering>true</filtering>
+						</resource>
+						<resource>
+							<excludes>
+								<exclude>beta/*</exclude>
+								<exclude>prod/*</exclude>
+							</excludes>
+							<directory>src/main/resources</directory>
+							<targetPath>WEB-INF/classes</targetPath>
+							<filtering>true</filtering>
+						</resource>
+					</webResources>
+
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	</build>
+	<packaging>war</packaging>
+
+	<name>money</name>
+	<!--<url>http://maven.apache.org</url>-->
+	<properties>
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<javax.servlet>3.1.0</javax.servlet>
+	</properties>
+
+
+	<dependencies>
+		<dependency>
+		    <groupId>com.thoughtworks.xstream</groupId>
+		    <artifactId>xstream</artifactId>
+		    <version>1.4.9</version>
+		</dependency>
+		<dependency>
+	        <groupId>com.fasterxml.jackson.core</groupId>
+	        <artifactId>jackson-core</artifactId>
+	        <version>2.6.3</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>com.fasterxml.jackson.core</groupId>
+	        <artifactId>jackson-databind</artifactId>
+	        <version>2.6.3</version>
+	    </dependency>
+
+	    <dependency>  
+	        <groupId>redis.clients</groupId>  
+	        <artifactId>jedis</artifactId>  
+	        <version>2.1.0</version>  
+	    </dependency> 
+		<dependency>  
+	        <groupId>org.springframework.data</groupId>  
+	        <artifactId>spring-data-redis</artifactId>  
+	        <version>1.0.2.RELEASE</version>  
+	    </dependency> 
+
+		<!-- 自定义jar包 -->
+
+		<!--<dependency>
+			<groupId>hprose</groupId>
+			<artifactId>java</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/hprose-java-1.6.0-beta4.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>onetwo</groupId>
+			<artifactId>common</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/onetwo-common-1.5.0.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>yooyo</groupId>
+			<artifactId>utils</artifactId>
+			<version>1.0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/yooyo-utils-1.0.0.jar</systemPath>
+		</dependency>
+-->
+		<dependency>
+			<groupId>hprose</groupId>
+			<artifactId>hprose-java</artifactId>
+			<version>1.6.0</version>
+			<classifier>beta4</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>onetwo</groupId>
+			<artifactId>onetwo-common</artifactId>
+			<version>1.5.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>yooyo</groupId>
+			<artifactId>yooyo-utils</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+	</dependencies>
+
+</project>
