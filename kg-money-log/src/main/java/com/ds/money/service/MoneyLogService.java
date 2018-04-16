@@ -32,6 +32,7 @@ public class MoneyLogService {
 	private TextMessage lastTextMessage = null;
 
 	public void start() {
+		logger.info("mq 执行 start 开始......");
 		for (;;) {
 			try {
 				long start = System.currentTimeMillis();

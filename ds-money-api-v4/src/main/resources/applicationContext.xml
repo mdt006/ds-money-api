@@ -25,7 +25,7 @@
         <property name="maxActive" value="1000" />
         <property name="testWhileIdle" value="true" />
         <property name="filters" value="config,stat" />
-        <property name="connectionProperties" value="config.decrypt=false" />
+        <property name="connectionProperties" value="config.decrypt=true" />
     </bean>
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
