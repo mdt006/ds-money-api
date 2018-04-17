@@ -10,77 +10,36 @@
 	<artifactId>ds-money-api-v4</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<!-- 环境切换 -->
-	<profiles>
-		<profile>
-			<!-- 本地开发环境 -->
-			<id>beta</id>
-			<properties>
-				<package.environment>beta</package.environment>
-			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
-		<profile>
-			<!-- 正式环境 -->
-			<id>prod</id>
-			<properties>
-				<package.environment>prod</package.environment>
-			</properties>
-		</profile>
-
-	</profiles>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-
-					<webResources>
-						<resource>
-							<!-- 资源根目录排除各环境的配置-->
-							<excludes>
-								<exclude>beta/*</exclude>
-								<exclude>prod/*</exclude>
-							</excludes>
-							<directory>src/main/resources/${package.environment}</directory>
-							<targetPath>WEB-INF/classes</targetPath>
-							<filtering>true</filtering>
-						</resource>
-						<resource>
-							<excludes>
-								<exclude>beta/*</exclude>
-								<exclude>prod/*</exclude>
-							</excludes>
-							<directory>src/main/resources</directory>
-							<targetPath>WEB-INF/classes</targetPath>
-							<filtering>true</filtering>
-						</resource>
-					</webResources>
-
+					<encoding>utf-8</encoding>
 				</configuration>
 			</plugin>
 		</plugins>
-
 		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+			</resource>
 			<resource>
 				<directory>src/main/java</directory>
 				<includes>
-					<include>**/*.properties</include>
 					<include>**/*.xml</include>
 				</includes>
 				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/conf/beta</directory>
 			</resource>
 		</resources>
 	</build>
