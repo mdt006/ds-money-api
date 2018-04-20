@@ -1,9 +1,12 @@
 package com.ds.money.untils;
 
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,11 +34,11 @@ public class RequestUtils {
 				logger.info(param);
     }
 	/**
-	 * 接收json请求参数
+	 * 接收json请求参数    错误方法
 	 * @param request
 	 * @return
 	 */
-	public static String getParams(HttpServletRequest request) {
+	/*public static String getParams(HttpServletRequest request) {
 		// 解析参数.
 		Enumeration map = request.getParameterNames();
 		String param =null;
@@ -44,7 +47,26 @@ public class RequestUtils {
 			param = (o == null ? "" : o.toString());
 		}
 		return param;
-    }
+    }*/
+	/**
+	 * 接收json请求参数  改正方法
+	 * @param request
+	 * @return
+	 */
+	public static String getParams(HttpServletRequest request) {
+		// 解析参数.
+		Enumeration map = request.getParameterNames();
+		Map<String,Object> paramMap = new HashMap<>();
+		while (map.hasMoreElements()) {
+			Object o = map.nextElement();
+			if(null != o && StringUtils.isNotBlank(o.toString())){
+				paramMap.put(o.toString(),request.getParameter(o.toString()));
+			}
+		}
+		return JSON.toJSONString(paramMap);
+	}
+
+
 	public static String getClientIp(HttpServletRequest request) {
 
         String ip = request.getHeader("x-forwarded-for");
