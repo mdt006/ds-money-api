@@ -38,7 +38,7 @@ public class RequestUtils {
 	 * @param request
 	 * @return
 	 */
-	/*public static String getParams(HttpServletRequest request) {
+	public static String getParams(HttpServletRequest request) {
 		// 解析参数.
 		Enumeration map = request.getParameterNames();
 		String param =null;
@@ -47,24 +47,8 @@ public class RequestUtils {
 			param = (o == null ? "" : o.toString());
 		}
 		return param;
-    }*/
-	/**
-	 * 接收json请求参数  改正方法
-	 * @param request
-	 * @return
-	 */
-	public static String getParams(HttpServletRequest request) {
-		// 解析参数.
-		Enumeration map = request.getParameterNames();
-		Map<String,Object> paramMap = new HashMap<>();
-		while (map.hasMoreElements()) {
-			Object o = map.nextElement();
-			if(null != o && StringUtils.isNotBlank(o.toString())){
-				paramMap.put(o.toString(),request.getParameter(o.toString()));
-			}
-		}
-		return JSON.toJSONString(paramMap);
-	}
+    }
+
 
 
 	public static String getClientIp(HttpServletRequest request) {
