@@ -503,7 +503,12 @@ public class MemberMoneyController {
 		logger.info("批量转账time:"+(end-start));
 		return result;
 	}
-	
+
+    /***
+     *
+     * @param request
+     * @return
+     */
 	@RequestMapping(value="transMoney",method=RequestMethod.POST)
 	public @ResponseBody Object transMoney(HttpServletRequest request) {
 		long start =System.currentTimeMillis();
