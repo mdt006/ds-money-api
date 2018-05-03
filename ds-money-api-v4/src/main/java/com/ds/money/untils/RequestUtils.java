@@ -34,7 +34,7 @@ public class RequestUtils {
 				logger.info(param);
     }
 	/**
-	 * 接收json请求参数    错误方法
+	 * 接收json请求参数
 	 * @param request
 	 * @return
 	 */
