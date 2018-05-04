@@ -31,7 +31,7 @@ public class TotalLogThread implements Runnable{
 			}
 			moneyLogDao.batchInsertOrUpdateLog(list);
 		} catch (Exception e) {
-			logger.info("TotalLogThread统计出错",e);
+			logger.error("TotalLogThread统计出错",e);
 		}finally{
 			cdl.countDown();
 		}
