@@ -23,7 +23,8 @@ public class TotalFromKeyLogService implements Runnable{
 	 */
 	@PostConstruct
 	public void exec(){
-		new Thread(this).start();
+		logger.info("开始统计钱包日志============暂时注释");
+		//new Thread(this).start();
 	}
 	public void run(){
 		while(true){
@@ -40,7 +41,7 @@ public class TotalFromKeyLogService implements Runnable{
 				logger.info("统计钱包日志完成,耗时:"+(end - start));
 				Thread.sleep(60*1000);
 			} catch (Exception e) {
-				logger.info("统计钱包日志出错:",e);
+				logger.error("统计钱包日志出错:",e);
 				continue;
 			}
 			
